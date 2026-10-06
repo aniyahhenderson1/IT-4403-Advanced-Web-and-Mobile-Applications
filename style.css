@@ -5,6 +5,16 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
 
 /* Entire website */
 body {
@@ -12,6 +22,12 @@ body {
     color: #111;
     background-color: white;
     line-height: 1.5;
+}
+
+/* Visible keyboard focus for every link */
+a:focus-visible {
+    outline: 3px solid #1a5fb4;
+    outline-offset: 3px;
 }
 
 
@@ -28,6 +44,8 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 30px;
 
     padding: 20px 30px;
 }
@@ -40,7 +58,8 @@ nav {
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    flex-wrap: wrap;
+    gap: 10px 30px;
 }
 
 .nav-links a {
@@ -65,14 +84,20 @@ nav {
 
 .hero h1 {
     font-size: 42px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .hero p {
-    max-width: 450px;
+    max-width: 520px;
     margin: 0 auto 30px auto;
 
     font-weight: bold;
+}
+
+/* the name line sits right under the title */
+.hero h1 + p {
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 .button {
@@ -105,10 +130,9 @@ nav {
 }
 
 .about h2 {
-    font-size: 16px;
-    font-weight: normal;
+    font-size: 18px;
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .about p {
@@ -118,9 +142,8 @@ nav {
     font-size: 16px;
 }
 
-.about .school {
-    margin-top: 35px;
-    margin-bottom: 15px;
+.about p + p {
+    margin-top: 20px;
 }
 
 .about a {
@@ -133,16 +156,17 @@ nav {
 }
 
 
-/* ---------------- COURSEWORK ---------------- */
+/* ---------------- LAB WORK + MILESTONES ---------------- */
 
 .coursework {
-    min-height: 300px;
-
     text-align: center;
 
     padding: 50px 20px;
 
     border-bottom: 4px solid black;
+
+    /* keeps the section from hiding under the page top when jumped to */
+    scroll-margin-top: 10px;
 }
 
 .coursework h2 {
@@ -150,42 +174,35 @@ nav {
     margin-bottom: 25px;
 }
 
+.coursework h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
 .course-links {
-    max-width: 500px;
+    max-width: 600px;
 
     margin: auto;
 
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 12px 25px;
 
     flex-wrap: wrap;
 }
 
+/* underlined so they are clearly links */
 .course-links a {
     color: black;
-    text-decoration: none;
+    text-decoration: underline;
 
     font-weight: bold;
 }
 
 .course-links a:hover {
-    text-decoration: underline;
-}
-
-.view-page {
-    display: inline-block;
-
-    margin-top: 30px;
-
-    color: black;
+    background-color: black;
+    color: white;
     text-decoration: none;
-
-    font-weight: bold;
-}
-
-.view-page:hover {
-    text-decoration: underline;
 }
 
 
@@ -215,6 +232,8 @@ footer p {
 
     nav {
         padding: 15px 20px;
+        justify-content: center;
+        text-align: center;
     }
 
     .name {
@@ -222,7 +241,8 @@ footer p {
     }
 
     .nav-links {
-        gap: 15px;
+        justify-content: center;
+        gap: 8px 15px;
     }
 
     .nav-links a {
