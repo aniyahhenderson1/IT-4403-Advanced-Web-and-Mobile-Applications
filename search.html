@@ -44,7 +44,7 @@ dd{overflow-wrap:anywhere}
 .result h2{font-size:1.25rem;margin-bottom:.25rem}
 .by{color:var(--muted);margin-bottom:.6rem}
 dl{font-size:.95rem;gap:.2rem 1rem}
-.links{margin-top:.75rem;font-weight:700;font-size:.95rem}
+.links{margin-top:.75rem;font-weight:700;font-size:.95rem;display:flex;flex-wrap:wrap;gap:.25rem 1.25rem}
 @media(max-width:560px){#results{grid-template-columns:1fr}.result{grid-template-columns:80px 1fr}}
 </style>
 </head>
@@ -87,10 +87,21 @@ $(function () {
         return;
       }
 
+      function olUrl(path) { return "https://openlibrary.org" + path; }
+      function ext(url, text) { return '<a href="' + url + '" target="_blank" rel="noopener">' + text + "</a>"; }
+      function authorsHtml(d) {
+        if (!has(d.author_name)) return null;
+        return $.map(d.author_name, function (name, i) {
+          var k = has(d.author_key) ? d.author_key[i] : null;
+          return k ? ext(olUrl("/authors/" + esc(k)), esc(name)) : esc(name);
+        }).join(", ");
+      }
+      var ACCESS = { borrowable: "Borrowable", no_ebook: "No ebook", public: "Free to read", printdisabled: "Print-disabled access only" };
+
       var html = "";
       $.each(docs, function (i, d) {
         var title = d.title || "Untitled";
-        var authors = has(d.author_name) ? d.author_name.join(", ") : "Author not available";
+        var authors = authorsHtml(d);
         var cover = d.cover_i
           ? '<img src="https://covers.openlibrary.org/b/id/' + d.cover_i + '-M.jpg" alt="Cover of ' + esc(title) + '" loading="lazy">'
           : '<div class="nocover" role="img" aria-label="No cover available for ' + esc(title) + '">No cover</div>';
@@ -98,20 +109,25 @@ $(function () {
         html += '<article class="result"><div>' + cover + "</div><div>";
         html += "<h2>" + esc(title) + "</h2>";
         if (d.subtitle) html += '<p class="by">' + esc(d.subtitle) + "</p>";
-        html += '<p class="by">by ' + esc(authors) + "</p><dl>";
+        html += '<p class="by">by ' + (authors || "Author not available") + "</p><dl>";
+
+        // always shown (with "Not available" when missing)
         html += row("First published", d.first_publish_year ? esc(d.first_publish_year) : NA);
         html += row("Editions", d.edition_count != null ? esc(d.edition_count) : NA);
-        html += row("Publishers", some(d.publisher, 3));
-        html += row("ISBN", some(d.isbn, 3));
-        html += row("Languages", some(d.language, 5));
-        html += row("Pages (median)", d.number_of_pages_median ? esc(d.number_of_pages_median) : NA);
-        html += row("Subjects", some(d.subject, 5));
+        html += row("Languages", has(d.language) ? $.map(d.language, function (l) { return esc(l.toUpperCase()); }).join(", ") : NA);
+
+        // shown only when the record has them
+        if (d.ebook_access) html += row("Ebook access", esc(ACCESS[d.ebook_access] || d.ebook_access));
+        if (d.has_fulltext != null) html += row("Full text online", d.has_fulltext ? "Yes" : "No");
+        if (has(d.publisher)) html += row("Publishers", some(d.publisher, 3));
+        if (has(d.isbn)) html += row("ISBN", some(d.isbn, 3));
+        if (d.number_of_pages_median) html += row("Pages (median)", esc(d.number_of_pages_median));
+        if (has(d.subject)) html += row("Subjects", some(d.subject, 5));
         html += "</dl><p class='links'>";
-        if (d.key) {
-          html += '<a href="https://openlibrary.org' + esc(d.key) + '" target="_blank" rel="noopener">View ' + esc(title) + " on Open Library</a>";
-        } else {
-          html += NA;
-        }
+
+        if (d.key) html += ext(olUrl(esc(d.key)), "View " + esc(title) + " on Open Library");
+        if (d.cover_edition_key) html += ext(olUrl("/books/" + esc(d.cover_edition_key)), "View edition record");
+        if (has(d.ia)) html += ext("https://archive.org/details/" + esc(d.ia[0]), "Borrow on Internet Archive");
         html += "</p></div></article>";
       });
       $("#results").html(html);
