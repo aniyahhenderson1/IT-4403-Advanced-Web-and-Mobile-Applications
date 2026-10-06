@@ -50,14 +50,18 @@ blockquote{margin:.5rem 0;padding-left:1rem;border-left:4px solid var(--sun);fon
 <body>
 <header>
   <nav aria-label="Main navigation">
-    <a href="index.html">Home</a>
-    <a href="search.html">Search Results</a>
+    <a href="index.html" class="name">Aniyah Henderson</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#lab-work">Lab Work</a>
+      <a href="index.html#milestones">Individual Project Milestone</a>
+    </div>
   </nav>
   <h1>Book Edition Record</h1>
   <p>Details loaded from <code>openlibrary-book.json</code>.</p>
 </header>
 <main id="content" aria-live="polite"><p>Loading book information...</p></main>
-<footer><p><a href="index.html">Back to project home</a></p></footer>
+<footer><p><a href="index.html">Back to project home</a> &nbsp;|&nbsp; <a href="search.html">View the search results page</a></p></footer>
 
 <script>
 $(function () {
@@ -76,7 +80,8 @@ $(function () {
 
   $.getJSON("openlibrary-book.json")
     .done(function (b) {
-      var cover = list(b.covers) ? b.covers[0] : null;
+      var covers = list(b.covers) ? $.grep(b.covers, function (c) { return c > 0; }) : [];
+      var cover = covers.length ? covers[0] : null;
       var title = b.title || "Untitled";
       var html = '<article class="book"><div>';
 
@@ -105,7 +110,10 @@ $(function () {
       html += row("Weight", esc(b.weight));
       html += row("Classification (Dewey)", joinEsc(b.dewey_decimal_class));
       html += row("Library of Congress", joinEsc(b.lc_classifications));
+      html += row("Contributors", joinEsc(b.contributions));
       html += row("Revision", esc(b.revision));
+      html += row("Last modified", b.last_modified ? esc(textOf(b.last_modified).slice(0, 10)) : null);
+      html += row("Record created", b.created ? esc(textOf(b.created).slice(0, 10)) : null);
       html += "</dl>";
 
       html += "<h2>Authors and works</h2><dl>";
@@ -121,9 +129,16 @@ $(function () {
         html += "</ul>";
       }
 
-      if (list(b.covers) && b.covers.length > 1) {
-        html += "<h2>Cover identifiers</h2><p>" + b.covers.join(", ") + "</p>";
+      if (covers.length > 1) {
+        html += "<h2>Cover identifiers</h2><p>" + covers.join(", ") + "</p>";
       }
+
+      var ids = b.identifiers || {};
+      html += "<h2>Other identifiers</h2><dl>";
+      html += row("Goodreads", joinEsc(ids.goodreads));
+      html += row("LibraryThing", joinEsc(ids.librarything));
+      html += row("Internet Archive", b.ocaid ? '<a href="https://archive.org/details/' + esc(b.ocaid) + '" target="_blank" rel="noopener">Borrow or read on Internet Archive</a>' : null);
+      html += "</dl>";
 
       html += "<h2>Open Library</h2><p>" + (b.key ? olLink(b.key, "View this edition on Open Library") : NA) + "</p>";
       html += "</div></article>";
