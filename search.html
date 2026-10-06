@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search Results: modern web | Milestone 1</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#151a33;--bg:#f4f5fb;--card:#fff;--blue:#3340ff;--sun:#ffc933;--muted:#586079;--line:#dcdff0;--soft:#eef0ff;--head:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:1.0625rem/1.6 var(--body)}
+h1,h2,h3{font-family:var(--head);line-height:1.15}
+a{color:var(--blue)}
+a:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:4px}
+header{background:var(--ink);color:#fff}
+header>*{max-width:1000px;margin-inline:auto;padding-inline:1.5rem}
+header nav{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem .5rem;padding-block:1rem}
+header nav a{color:#d6d9ff;text-decoration:none;padding:.3rem .8rem;border-radius:999px}
+header nav a:hover{background:rgba(255,255,255,.14);color:#fff}
+header nav .nav-links{display:flex;flex-wrap:wrap;gap:.25rem;padding:0}
+header nav .name{margin-right:auto;padding-left:0;font:800 1.3rem var(--head);color:#fff}
+header nav .name:hover{background:none}
+header h1{color:#fff;font-size:clamp(2rem,5vw,3rem);font-weight:800;padding-top:1.5rem}
+header p{color:#c9cdea;padding-bottom:3rem;margin-top:.5rem}
+header code{background:rgba(255,255,255,.14);padding:.05rem .4rem;border-radius:4px}
+footer{max-width:1000px;margin:2.5rem auto 2rem;padding-inline:1.5rem;color:var(--muted)}
+footer h2{font-size:1rem;margin-bottom:.25rem;color:var(--ink)}
+footer p{font-size:.95rem}
+main{max-width:1000px;margin:-1.75rem auto 0;padding:0 1.5rem;position:relative}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1.25rem}
+dt{font-weight:700;color:var(--muted)}
+dd{overflow-wrap:anywhere}
+.nocover{display:flex;align-items:center;justify-content:center;background:var(--soft);color:var(--muted);text-align:center;font-size:.9rem;border-left:8px solid var(--blue)}
+.error{background:#fff0ef;border:1px solid #e2a29b;padding:1rem 1.25rem;border-radius:10px}
+#results{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:1rem}
+.result{display:grid;grid-template-columns:110px 1fr;gap:1.25rem;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.25rem}
+.result img{width:100%;height:auto;border-left:6px solid var(--blue);border-radius:4px}
+.result .nocover{aspect-ratio:2/3;border-left-width:6px}
+.result h2{font-size:1.25rem;margin-bottom:.25rem}
+.by{color:var(--muted);margin-bottom:.6rem}
+dl{font-size:.95rem;gap:.2rem 1rem}
+.links{margin-top:.75rem;font-weight:700;font-size:.95rem}
+@media(max-width:560px){#results{grid-template-columns:1fr}.result{grid-template-columns:80px 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <nav aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="book.html">Single Book</a>
+  </nav>
+  <h1>Search Results for &ldquo;modern web&rdquo;</h1>
+  <p id="summary">Loading results...</p>
+</header>
+<main><div id="results" aria-live="polite"></div></main>
+<footer><p><a href="index.html">Back to project home</a></p></footer>
+
+<script>
+$(function () {
+  var NA = "Not available";
+  function esc(s) { return $("<div>").text(s == null ? "" : s).html(); }
+  function has(a) { return $.isArray(a) && a.length > 0; }
+  function some(a, n) {           // first n items, with "+ more" note
+    if (!has(a)) return NA;
+    var out = $.map(a.slice(0, n), esc).join(", ");
+    return a.length > n ? out + " (+" + (a.length - n) + " more)" : out;
+  }
+  function row(label, value) { return "<dt>" + label + "</dt><dd>" + value + "</dd>"; }
+
+  $.getJSON("openlibrary-search.json")
+    .done(function (data) {
+      var docs = has(data.docs) ? data.docs : [];
+      var total = data.numFound != null ? data.numFound : docs.length;
+      $("#summary").text("Showing " + docs.length + " of " + total + " books found.");
+
+      if (!docs.length) {
+        $("#results").html("<p>No books were found in the file.</p>");
+        return;
+      }
+
+      var html = "";
+      $.each(docs, function (i, d) {
+        var title = d.title || "Untitled";
+        var authors = has(d.author_name) ? d.author_name.join(", ") : "Author not available";
+        var cover = d.cover_i
+          ? '<img src="https://covers.openlibrary.org/b/id/' + d.cover_i + '-M.jpg" alt="Cover of ' + esc(title) + '" loading="lazy">'
+          : '<div class="nocover" role="img" aria-label="No cover available for ' + esc(title) + '">No cover</div>';
+
+        html += '<article class="result"><div>' + cover + "</div><div>";
+        html += "<h2>" + esc(title) + "</h2>";
+        if (d.subtitle) html += '<p class="by">' + esc(d.subtitle) + "</p>";
+        html += '<p class="by">by ' + esc(authors) + "</p><dl>";
+        html += row("First published", d.first_publish_year ? esc(d.first_publish_year) : NA);
+        html += row("Editions", d.edition_count != null ? esc(d.edition_count) : NA);
+        html += row("Publishers", some(d.publisher, 3));
+        html += row("ISBN", some(d.isbn, 3));
+        html += row("Languages", some(d.language, 5));
+        html += row("Pages (median)", d.number_of_pages_median ? esc(d.number_of_pages_median) : NA);
+        html += row("Subjects", some(d.subject, 5));
+        html += "</dl><p class='links'>";
+        if (d.key) {
+          html += '<a href="https://openlibrary.org' + esc(d.key) + '" target="_blank" rel="noopener">View ' + esc(title) + " on Open Library</a>";
+        } else {
+          html += NA;
+        }
+        html += "</p></div></article>";
+      });
+      $("#results").html(html);
+    })
+    .fail(function () {
+      $("#summary").text("");
+      $("#results").html('<div class="error"><strong>Could not load the search results.</strong> Check that <code>openlibrary-search.json</code> is in the same folder as this page, and open the page through GitHub Pages or a local server rather than by double-clicking the file.</div>');
+    });
+});
+</script>
+</body>
+</html>
