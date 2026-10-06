@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Aniyah Henderson | IT 4403</title>
+    <title>Aniyah Henderson | IT 4403 Project Home</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,71 +14,83 @@
 
     <!-- HEADER -->
     <header>
-        <nav>
+        <nav aria-label="Main navigation">
             <a href="index.html" class="name">Aniyah Henderson</a>
 
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="labs.html">Work</a>
+                <a href="#lab-work">Lab Work</a>
+                <a href="#milestones">Individual Project Milestone</a>
             </div>
         </nav>
     </header>
 
 
-    <!-- MAIN INTRO -->
     <main>
 
+        <!-- HERO: page title, name, description -->
         <section class="hero">
-            <h1>IT 4403</h1>
+            <h1>IT 4403 Project Home</h1>
+            <p><strong>Aniyah Henderson</strong></p>
 
             <p>
-                This website contains my labs, exercises,
-                assignments, and projects completed for IT 4403.
+                This website is my student portfolio. It contains my practice labs
+                and the individual project milestones that build toward a
+                single-page application (SPA) using JavaScript, jQuery, and
+                Open Library book data.
             </p>
 
-            <a href="labs.html" class="button">Labs</a>
+            <a href="#milestones" class="button">View Milestone 1</a>
         </section>
 
 
-        <!-- ABOUT -->
+        <!-- ABOUT: affiliation and course info -->
         <section class="about">
 
-            <h2>| ABOUT THIS SITE |</h2>
+            <h2>About This Site</h2>
 
             <p>
-                This website serves as my student portfolio for
-                IT 4403 – Advanced Web and Mobile Applications.
-                It will showcase coursework completed throughout
-                the semester.
+                Course: IT 4403 &ndash; Advanced Web and Mobile Applications<br>
+                University: Kennesaw State University
             </p>
 
-            <p class="school">
-                | Kennesaw State University |
+            <p>
+                <a
+                    href="https://campus.kennesaw.edu/colleges-departments/ccse/academics/information-technology/index.php"
+                    target="_blank" rel="noopener">
+                    Visit the CCSE Department of Information Technology (opens in a new tab)
+                </a>
             </p>
-
-            <a
-                href="https://campus.kennesaw.edu/colleges-departments/ccse/academics/information-technology/index.php"
-                target="_blank">
-                Visit the CCSE Department of Information Technology
-            </a>
 
         </section>
 
 
-        <!-- COURSEWORK -->
-        <section class="coursework">
+        <!-- LAB WORK -->
+        <section class="coursework" id="lab-work">
 
-            <h2>| Labs |</h2>
+            <h2>Lab Work</h2>
 
             <div class="course-links">
-                <a href="excercises.html">| Exercises |</a>
-                <a href="assignments.html">| Assignments |</a>
-                <a href="projects.html">| Projects |</a>
+                <!-- Change these file names to match your real lab pages -->
+                <a href="lab1.html">Lab 1</a>
+                <a href="lab2.html">Lab 2</a>
+                <a href="lab3.html">Lab 3</a>
             </div>
 
-            <a href="labs.html" class="view-page">
-                | VIEW PAGE |
-            </a>
+        </section>
+
+
+        <!-- INDIVIDUAL PROJECT MILESTONE -->
+        <section class="coursework" id="milestones">
+
+            <h2>Individual Project Milestone</h2>
+
+            <h3>Milestone 1: Working with JSON Data</h3>
+
+            <div class="course-links">
+                <a href="book.html">Milestone 1: Single Book Edition</a>
+                <a href="search.html">Milestone 1: Search Results for &ldquo;modern web&rdquo;</a>
+            </div>
 
         </section>
 
@@ -88,7 +100,7 @@
     <!-- FOOTER -->
     <footer>
 
-        <h2>| DISCLAIMER |</h2>
+        <h2>Disclaimer</h2>
 
         <p>
             This is a student website created for course projects
