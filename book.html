@@ -72,7 +72,10 @@ $(function () {
     if (v == null) return null;
     return typeof v === "object" ? (v.value || null) : String(v);
   }
-  function row(label, html) { return "<dt>" + label + "</dt><dd>" + (html || NA) + "</dd>"; }
+  function row(label, html, optional) {
+    if (!html && optional) return "";   // leave out optional rows that have no value
+    return "<dt>" + label + "</dt><dd>" + (html || NA) + "</dd>";
+  }
   function joinEsc(a) { return list(a) ? $.map(a, esc).join(", ") : null; }
   function olLink(path, label) {
     return '<a href="https://openlibrary.org' + esc(path) + '" target="_blank" rel="noopener">' + esc(label) + "</a>";
@@ -100,20 +103,20 @@ $(function () {
       html += row("Publisher", joinEsc(b.publishers));
       html += row("Published", esc(b.publish_date));
       html += row("Pages", esc(b.number_of_pages));
-      html += row("Format", esc(b.physical_format));
+      html += row("Format", esc(b.physical_format), true);
       html += row("ISBN-10", joinEsc(b.isbn_10));
       html += row("ISBN-13", joinEsc(b.isbn_13));
-      html += row("Edition name", esc(b.edition_name));
-      html += row("Languages", list(b.languages) ? $.map(b.languages, function (l) { return esc((l.key || "").replace("/languages/", "")); }).join(", ") : null);
-      html += row("Publish places", joinEsc(b.publish_places));
-      html += row("Dimensions", esc(b.physical_dimensions));
-      html += row("Weight", esc(b.weight));
-      html += row("Classification (Dewey)", joinEsc(b.dewey_decimal_class));
-      html += row("Library of Congress", joinEsc(b.lc_classifications));
-      html += row("Contributors", joinEsc(b.contributions));
-      html += row("Revision", esc(b.revision));
-      html += row("Last modified", b.last_modified ? esc(textOf(b.last_modified).slice(0, 10)) : null);
-      html += row("Record created", b.created ? esc(textOf(b.created).slice(0, 10)) : null);
+      html += row("Edition name", esc(b.edition_name), true);
+      html += row("Languages", list(b.languages) ? $.map(b.languages, function (l) { return esc((l.key || "").replace("/languages/", "")); }).join(", ") : null, true);
+      html += row("Publish places", joinEsc(b.publish_places), true);
+      html += row("Dimensions", esc(b.physical_dimensions), true);
+      html += row("Weight", esc(b.weight), true);
+      html += row("Classification (Dewey)", joinEsc(b.dewey_decimal_class), true);
+      html += row("Library of Congress", joinEsc(b.lc_classifications), true);
+      html += row("Contributors", joinEsc(b.contributions), true);
+      html += row("Revision", esc(b.revision), true);
+      html += row("Last modified", b.last_modified ? esc(textOf(b.last_modified).slice(0, 10)) : null, true);
+      html += row("Record created", b.created ? esc(textOf(b.created).slice(0, 10)) : null, true);
       html += "</dl>";
 
       html += "<h2>Authors and works</h2><dl>";
@@ -135,9 +138,9 @@ $(function () {
 
       var ids = b.identifiers || {};
       html += "<h2>Other identifiers</h2><dl>";
-      html += row("Goodreads", joinEsc(ids.goodreads));
-      html += row("LibraryThing", joinEsc(ids.librarything));
-      html += row("Internet Archive", b.ocaid ? '<a href="https://archive.org/details/' + esc(b.ocaid) + '" target="_blank" rel="noopener">Borrow or read on Internet Archive</a>' : null);
+      html += row("Goodreads", joinEsc(ids.goodreads), true);
+      html += row("LibraryThing", joinEsc(ids.librarything), true);
+      html += row("Internet Archive", b.ocaid ? '<a href="https://archive.org/details/' + esc(b.ocaid) + '" target="_blank" rel="noopener">Borrow or read on Internet Archive</a>' : null, true);
       html += "</dl>";
 
       html += "<h2>Open Library</h2><p>" + (b.key ? olLink(b.key, "View this edition on Open Library") : NA) + "</p>";
