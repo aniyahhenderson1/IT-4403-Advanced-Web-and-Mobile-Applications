@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 4 | IT 4403</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab2.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="name">Aniyah Henderson</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab2.html">Lab 2</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Exercise 4</h1>
+            <p>Table Selection and Event Handling</p>
+        </section>
+
+        <section class="coursework">
+            <h2>Student Table</h2>
+            <div class="controls">
+                <button type="button" class="btn" id="styleOdd">Style odd rows</button>
+                <button type="button" class="btn" id="hideOdd">Hide odd rows</button>
+                <button type="button" class="btn" id="restore">Restore rows</button>
+            </div>
+            <p class="hint">Click any row to hide just that row. &ldquo;Odd rows&rdquo; means the 1st, 3rd, and 5th data rows.</p>
+            <table class="data" id="students">
+                <thead>
+                    <tr><th>Name</th><th>Major</th><th>GPA</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Ava Johnson</td><td>Information Technology</td><td>3.8</td></tr>
+                    <tr><td>Marcus Lee</td><td>Computer Science</td><td>3.5</td></tr>
+                    <tr><td>Priya Patel</td><td>Information Technology</td><td>3.9</td></tr>
+                    <tr><td>Daniel Brooks</td><td>Cybersecurity</td><td>3.2</td></tr>
+                    <tr><td>Sofia Ramirez</td><td>Data Science</td><td>3.7</td></tr>
+                    <tr><td>Ethan Walker</td><td>Software Engineering</td><td>3.4</td></tr>
+                </tbody>
+            </table>
+            <div class="output" id="output" aria-live="polite">Click a button or a row.</div>
+        </section>
+
+        <section class="coursework">
+            <a href="lab2.html" class="button">Back to Lab 2</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>Disclaimer</h2>
+        <p>This is a student website created for course projects in IT 4403.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            // :nth-child(odd) counts from 1, so it picks the 1st, 3rd, 5th data rows.
+            var oddRows = "#students tbody tr:nth-child(odd)";
+
+            $("#styleOdd").click(function () {
+                $(oddRows).css({ "background-color": "#ffe28a", "font-style": "italic", "border-left": "6px solid #3340ff" });
+                $("#output").text("Odd rows styled.");
+            });
+            $("#hideOdd").click(function () {
+                $(oddRows).hide();
+                $("#output").text("Odd rows hidden.");
+            });
+            $("#restore").click(function () {
+                $("#students tbody tr").show();
+                $("#output").text("All rows restored.");
+            });
+            $("#students tbody tr").click(function () {
+                $(this).hide();
+                $("#output").text("Hid the row for " + $(this).find("td:first").text() + ".");
+            });
+        });
+    </script>
+</body>
+
+</html>
