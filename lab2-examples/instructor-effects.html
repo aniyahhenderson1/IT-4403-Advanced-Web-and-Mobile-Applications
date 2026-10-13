@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#change1').click(function(){$('#result').hide()});
+                $('#change2').click(function(){$('#result').show()});
+                $('#change3').click(function(){$('#result').toggle()});
+                $('#change4').click(function(){$('#result').hide().slideDown()});
+                $('#change5').click(function(){$('#result').hide().fadeIn()});
+            });
+
+
+            function changeColor() {
+                $("#result").css("background-color", getRandomColorCode());
+            }
+
+            function changeSize() {
+                var h = Math.floor(Math.random() * 100) + 50;
+                var w = Math.floor(Math.random() * 200) + 200;
+                $("#result").css("height", h + "px");
+                $("#result").css("width", w + "px");
+            }
+
+            function changeBorder() {
+                var w = Math.floor(Math.random() * 20) + 5;
+                document.getElementById("result").style.borderWidth = w + "px";
+                document.getElementById("result").style.borderColor = getRandomColorCode();
+            }
+
+
+    </script>
+    </head>
+    <body>
+		<h2>jQuery Effects</h2>
+        <input id="change1" type="button" value="Hide" />
+        <input id="change2" type="button" value="Show" /> 
+        <input id="change3" type="button" value="Toggle" />
+        <input id="change4" type="button" value="Slide" />
+        <input id="change5" type="button" value="Fade" />
+        <hr />
+        <div id="result" style="border:solid; text-align:center;width: 400px">
+        jQuery is a lightweight, "write less, do more", JavaScript library.
+        The purpose of jQuery is to make it much easier to use JavaScript on your website.
+        jQuery takes a lot of common tasks that require many lines of JavaScript code to accomplish, and wraps them into methods that you can call with a single line of code.
+        jQuery also simplifies a lot of the complicated things from JavaScript, like AJAX calls and DOM manipulation.    
+            
+        </div>
+        
+    </body>
+</html>
