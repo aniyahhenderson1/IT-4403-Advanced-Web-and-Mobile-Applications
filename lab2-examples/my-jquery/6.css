@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>jquery CSS</title>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#change1').click(function(){changeStyle()});
+                $('#change2').click(function(){changeColor()});
+                $('#change3').click(function(){changeSize()});
+                $('#change4').click(function(){changeBorder()});
+            });
+
+            function getRandomColorCode() {
+                var red = Math.floor(Math.random() * 255);
+                var green = Math.floor(Math.random() * 255);
+                var blue = Math.floor(Math.random() * 255);
+                var colorCode = "rgb(" + red + "," + green + "," + blue + ")";
+                return colorCode;
+            }
+
+            function changeColor() {
+                $("#result").css("background-color", getRandomColorCode());
+            }
+
+            function changeSize() {
+                var h = Math.floor(Math.random() * 100) + 50;
+                var w = Math.floor(Math.random() * 200) + 200;
+                $("#result").css("height", h + "px");
+                $("#result").css("width", w + "px");
+            }
+
+            function changeBorder() {
+                var w = Math.floor(Math.random() * 20) + 5;
+                document.getElementById("result").style.borderWidth = w + "px";
+                document.getElementById("result").style.borderColor = getRandomColorCode();
+            }
+
+            function changeStyle() {
+                changeColor();
+                changeSize();
+                changeBorder();
+            }
+    </script>
+    </head>
+    <body>
+		<h2>Change CSS styles using jQuery</h2>
+        <input id="change1" type="button" value="Change Style" /><br />or 
+		<br />
+        <input id="change2" type="button" value="Change Color" /> 
+        <input id="change3" type="button" value="Change Size" />
+        <input id="change4" type="button" value="Change Border" />
+        <h1 id="result" style="border:solid; text-align:center">Welcome</h1>
+        
+    </body>
+</html>
