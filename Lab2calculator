@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator | IT 4403</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab2.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="name">Aniyah Henderson</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab2.html">Lab 2</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Calculator Application</h1>
+            <p>Built with jQuery</p>
+        </section>
+
+        <section class="coursework">
+            <h2>Calculator</h2>
+            <form id="calcForm" novalidate>
+                <label for="num1">First number</label>
+                <input type="text" id="num1" inputmode="decimal" autocomplete="off">
+
+                <label for="num2">Second number</label>
+                <input type="text" id="num2" inputmode="decimal" autocomplete="off">
+
+                <label for="op">Operation</label>
+                <select id="op">
+                    <option value="+">Addition (+)</option>
+                    <option value="-">Subtraction (&minus;)</option>
+                    <option value="*">Multiplication (*)</option>
+                    <option value="/">Division (/)</option>
+                </select>
+
+                <label for="color">Result color (a color name such as red, blue, green)</label>
+                <input type="text" id="color" value="blue" autocomplete="off">
+
+                <div class="controls">
+                    <button type="submit" class="btn primary" id="calcBtn">Calculate</button>
+                </div>
+            </form>
+            <div class="result-box" id="result" aria-live="polite"></div>
+        </section>
+
+        <section class="coursework">
+            <a href="lab2.html" class="button">Back to Lab 2</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>Disclaimer</h2>
+        <p>This is a student website created for course projects in IT 4403.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            function isNumber(s) { return s !== "" && isFinite(Number(s)); }
+            function validColor(c) {
+                var test = $("<span>").css("color", c);   // browser ignores invalid color names
+                return test.css("color") !== "";
+            }
+            function showError(msg) {
+                $("#result").removeAttr("style").addClass("error").text(msg);
+            }
+
+            $("#calcForm").submit(function (e) {
+                e.preventDefault();
+                var a = $("#num1").val().trim();
+                var b = $("#num2").val().trim();
+                var op = $("#op").val();
+                var color = $("#color").val().trim();
+
+                if (a === "" || b === "") { showError("Please enter a value in both number fields."); return; }
+                if (!isNumber(a) || !isNumber(b)) { showError("Both entries must be valid numbers."); return; }
+                a = Number(a); b = Number(b);
+                if (op === "/" && b === 0) { showError("You cannot divide by zero."); return; }
+
+                var r;
+                if (op === "+") r = a + b;
+                else if (op === "-") r = a - b;
+                else if (op === "*") r = a * b;
+                else r = a / b;
+                r = Math.round(r * 1e10) / 1e10;   // trims floating point noise
+
+                var note = "";
+                if (color === "" || !validColor(color)) {
+                    if (color !== "") note = '  ("' + color + '" is not a color name, so the default color is used)';
+                    color = "#151a33";
+                }
+                $("#result").removeClass("error").css("color", color).text(a + " " + op + " " + b + " = " + r);
+                if (note) $("#result").append($("<div>").css({ font: "400 .9rem sans-serif", color: "#586079" }).text(note));
+            });
+        });
+    </script>
+</body>
+
+</html>
