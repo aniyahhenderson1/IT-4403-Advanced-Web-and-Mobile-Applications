@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>jQuery HTML DOM</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+		//get content
+		$("#display").append('<b>The link\'s inner text: </b>'+$("#w3clink").text());
+		$("#display").append('<br /><b>The link\'s inner html: </b>'+$("#w3clink").html());
+		//get attribute value
+		
+		$("#display").append('<br /><b>The link\'s href attrubute value: </b>'+$("#w3clink").attr("href"));
+		$("#display").append('<br /><b>The img\'s src attrubute value: </b>'+$("#w3cimg").attr("src"));
+	});	
+
+	</script>
+</head>
+
+<body><h1>HTML DOM</h1>
+<p>This example shows how to access each part of the HTML using DOM</p>
+
+<hr />
+
+<a id="w3clink" href="http://www.w3.org/">
+	<img id="w3cimg" src="http://www.w3.org/2008/site/images/logo-w3c-screen-lg" />
+	W3C
+</a>
+
+<h3>Various methods to access parts of the objects above</h3>
+<p id="display"></p>
+
+</body>
+</html>
