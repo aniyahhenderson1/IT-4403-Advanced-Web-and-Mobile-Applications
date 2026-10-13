@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 3 | IT 4403</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab2.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="name">Aniyah Henderson</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab2.html">Lab 2</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Exercise 3</h1>
+            <p>jQuery Selectors, DOM, and CSS</p>
+        </section>
+
+        <section class="coursework">
+            <h2>Demo Content</h2>
+            <div class="stage" id="stage">
+                <h3 id="stageHeading">A Heading Inside the Stage</h3>
+                <p id="intro">This is the intro paragraph (ID: <code>intro</code>).</p>
+                <p class="note">First note paragraph (class: <code>note</code>).</p>
+                <p class="note">Second note paragraph (class: <code>note</code>).</p>
+                <p id="toggleTarget">This paragraph is the target for hide, show, and toggle.</p>
+                <ul id="fruitList">
+                    <li>Apples</li>
+                    <li>Bananas</li>
+                    <li>Cherries</li>
+                </ul>
+                <p><a id="demoLink" href="https://jquery.com" target="_blank" rel="noopener" title="jQuery home">A link with attributes</a></p>
+                <div id="styleTarget" style="padding:.75rem;background:#fff">Style target box</div>
+            </div>
+            <div class="output" id="output" aria-live="polite">Output appears here.</div>
+        </section>
+
+        <section class="coursework">
+            <h2>Selectors</h2>
+            <div class="controls">
+                <button type="button" class="btn" id="selId">By ID: #intro</button>
+                <button type="button" class="btn" id="selClass">By class: .note</button>
+                <button type="button" class="btn" id="selTag">By element: li</button>
+                <button type="button" class="btn" id="clearHighlight">Clear highlights</button>
+            </div>
+        </section>
+
+        <section class="coursework">
+            <h2>DOM Manipulation</h2>
+            <div class="controls">
+                <button type="button" class="btn" id="readText">Read text()</button>
+                <button type="button" class="btn" id="readHtml">Read html()</button>
+                <button type="button" class="btn" id="setText">Change text()</button>
+                <button type="button" class="btn" id="setHtml">Change html()</button>
+                <button type="button" class="btn" id="readAttr">Read attr("href")</button>
+                <button type="button" class="btn" id="setAttr">Change attr("href")</button>
+            </div>
+        </section>
+
+        <section class="coursework">
+            <h2>Visibility</h2>
+            <div class="controls">
+                <button type="button" class="btn" id="hideBtn">Hide</button>
+                <button type="button" class="btn" id="showBtn">Show</button>
+                <button type="button" class="btn" id="toggleBtn">Toggle</button>
+            </div>
+        </section>
+
+        <section class="coursework">
+            <h2>CSS Manipulation</h2>
+            <div class="controls">
+                <button type="button" class="btn" id="cssBg">Background color</button>
+                <button type="button" class="btn" id="cssColor">Text color</button>
+                <button type="button" class="btn" id="cssFont">Font size</button>
+                <button type="button" class="btn" id="cssBorder">Border</button>
+                <button type="button" class="btn" id="cssWidth">Width / height</button>
+                <button type="button" class="btn" id="cssReset">Reset</button>
+            </div>
+        </section>
+
+        <section class="coursework">
+            <a href="lab2.html" class="button">Back to Lab 2</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>Disclaimer</h2>
+        <p>This is a student website created for course projects in IT 4403.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            var original = { text: $("#intro").text(), html: $("#intro").html(), href: $("#demoLink").attr("href") };
+            function say(msg) { $("#output").text(msg); }
+
+            // Selectors
+            $("#selId").click(function () { $("#intro").css("background-color", "#ffe28a"); say('$("#intro") selected 1 element.'); });
+            $("#selClass").click(function () { var $n = $(".note").css("background-color", "#bff0dc"); say('$(".note") selected ' + $n.length + " elements."); });
+            $("#selTag").click(function () { var $n = $("#stage li").css("background-color", "#ffd0dc"); say('$("li") selected ' + $n.length + " elements."); });
+            $("#clearHighlight").click(function () { $("#intro, .note, #stage li").css("background-color", ""); say("Highlights cleared."); });
+
+            // DOM
+            $("#readText").click(function () { say('text(): ' + $("#intro").text()); });
+            $("#readHtml").click(function () { say('html(): ' + $("#intro").html()); });
+            $("#setText").click(function () { $("#intro").text("The text was changed with text(). <b>Tags stay as plain text.</b>"); say("text() set."); });
+            $("#setHtml").click(function () { $("#intro").html("The HTML was changed with <b>html()</b>, so <em>tags work</em>."); say("html() set."); });
+            $("#readAttr").click(function () { say('attr("href"): ' + $("#demoLink").attr("href")); });
+            $("#setAttr").click(function () {
+                $("#demoLink").attr("href", "https://api.jquery.com").attr("title", "jQuery API");
+                say('href is now ' + $("#demoLink").attr("href"));
+            });
+
+            // Visibility
+            $("#hideBtn").click(function () { $("#toggleTarget").hide(); say("hide() called."); });
+            $("#showBtn").click(function () { $("#toggleTarget").show(); say("show() called."); });
+            $("#toggleBtn").click(function () { $("#toggleTarget").toggle(); say("toggle() called."); });
+
+            // CSS
+            $("#cssBg").click(function () { $("#styleTarget").css("background-color", "#ffc933"); say("Background color changed."); });
+            $("#cssColor").click(function () { $("#styleTarget").css("color", "#3340ff"); say("Text color changed."); });
+            $("#cssFont").click(function () { $("#styleTarget").css("font-size", "1.8rem"); say("Font size changed."); });
+            $("#cssBorder").click(function () { $("#styleTarget").css("border", "4px dashed #151a33"); say("Border changed."); });
+            $("#cssWidth").click(function () { $("#styleTarget").css({ width: "60%", height: "120px" }); say("Width and height changed."); });
+            $("#cssReset").click(function () {
+                $("#styleTarget").removeAttr("style").css({ padding: ".75rem", "background-color": "#fff" });
+                $("#intro").text(original.text);
+                $("#demoLink").attr("href", original.href).attr("title", "jQuery home");
+                $("#toggleTarget").show();
+                say("Everything reset.");
+            });
+        });
+    </script>
+</body>
+
+</html>
