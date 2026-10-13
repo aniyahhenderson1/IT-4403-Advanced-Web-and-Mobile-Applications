@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2 | IT 4403</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab2.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="name">Aniyah Henderson</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab2.html">Lab 2</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Lab 2: jQuery</h1>
+            <p>IT 4403 &ndash; Advanced Web and Mobile Applications</p>
+        </section>
+
+        <section class="coursework">
+            <h2>Lab 2: jQuery</h2>
+            <p>Each link below opens a completed Lab 2 exercise as a working page.</p>
+        </section>
+
+        <section class="coursework" id="ex1">
+            <h2>Exercise 1: JavaScript and jQuery Comparison</h2>
+            <h3>Traditional JavaScript versions</h3>
+            <div class="course-links">
+                <a href="lab2-examples/js/1.calculation.html">1. Calculation</a>
+                <a href="lab2-examples/js/2.loop.html">2. Loop</a>
+                <a href="lab2-examples/js/3.function.html">3. Function</a>
+                <a href="lab2-examples/js/4.dom-get.html">4. DOM get</a>
+                <a href="lab2-examples/js/5.click.html">5. Click</a>
+                <a href="lab2-examples/js/6.css.html">6. CSS</a>
+            </div>
+            <h3>jQuery versions</h3>
+            <div class="course-links">
+                <a href="lab2-examples/jquery/1.calculation.html">1. Calculation</a>
+                <a href="lab2-examples/jquery/2.loop.html">2. Loop</a>
+                <a href="lab2-examples/jquery/3.function.html">3. Function</a>
+                <a href="lab2-examples/jquery/4.dom-get.html">4. DOM get</a>
+                <a href="lab2-examples/jquery/5.click.html">5. Click</a>
+                <a href="lab2-examples/jquery/6.css.html">6. CSS</a>
+            </div>
+        </section>
+
+        <section class="coursework" id="ex2-7">
+            <h2>Exercises 2&ndash;7</h2>
+            <div class="course-links">
+                <a href="lab2-ex2.html">Exercise 2: ready() and Events</a>
+                <a href="lab2-ex3.html">Exercise 3: Selectors, DOM, and CSS</a>
+                <a href="lab2-ex4.html">Exercise 4: Table Selection and Events</a>
+                <a href="lab2-ex5.html">Exercise 5: Visual Effects</a>
+                <a href="lab2-calculator.html">Calculator Application</a>
+                <a href="lab2-picture-browser.html">Picture Browser Application</a>
+            </div>
+        </section>
+
+        <section class="coursework">
+            <a href="index.html" class="button">Back Home</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>Disclaimer</h2>
+        <p>This is a student website created for course projects in IT 4403.</p>
+    </footer>
+
+
+</body>
+
+</html>
