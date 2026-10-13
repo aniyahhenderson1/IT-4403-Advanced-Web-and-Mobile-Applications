@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 5 | IT 4403</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab2.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="name">Aniyah Henderson</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab2.html">Lab 2</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Exercise 5</h1>
+            <p>jQuery Visual Effects</p>
+        </section>
+
+        <section class="coursework">
+            <h2>Effects Demo</h2>
+            <div class="controls">
+                <button type="button" class="btn" id="hideBtn">Hide</button>
+                <button type="button" class="btn" id="showBtn">Show</button>
+                <button type="button" class="btn" id="toggleBtn">Toggle</button>
+                <button type="button" class="btn" id="fadeOutBtn">Fade out</button>
+                <button type="button" class="btn" id="fadeInBtn">Fade in</button>
+                <button type="button" class="btn" id="fadeToggleBtn">Fade toggle</button>
+                <button type="button" class="btn" id="slideUpBtn">Slide up</button>
+                <button type="button" class="btn" id="slideDownBtn">Slide down</button>
+                <button type="button" class="btn" id="slideToggleBtn">Slide toggle</button>
+            </div>
+            <div id="result" class="stage" style="text-align:center">
+                jQuery is a lightweight, &ldquo;write less, do more&rdquo; JavaScript library. Its purpose is to make it much easier to use JavaScript on your website.
+                jQuery takes common tasks that need many lines of JavaScript and wraps them into methods you can call with a single line of code.
+                It also simplifies things like AJAX calls and DOM manipulation.
+            </div>
+        </section>
+
+        <section class="coursework">
+            <a href="lab2.html" class="button">Back to Lab 2</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>Disclaimer</h2>
+        <p>This is a student website created for course projects in IT 4403.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            var $r = $("#result");
+            $("#hideBtn").click(function () { $r.hide(); });
+            $("#showBtn").click(function () { $r.show(); });
+            $("#toggleBtn").click(function () { $r.toggle(); });
+            $("#fadeOutBtn").click(function () { $r.fadeOut(600); });
+            $("#fadeInBtn").click(function () { $r.fadeIn(600); });
+            $("#fadeToggleBtn").click(function () { $r.fadeToggle(600); });
+            $("#slideUpBtn").click(function () { $r.slideUp(600); });
+            $("#slideDownBtn").click(function () { $r.slideDown(600); });
+            $("#slideToggleBtn").click(function () { $r.slideToggle(600); });
+        });
+    </script>
+</body>
+
+</html>
