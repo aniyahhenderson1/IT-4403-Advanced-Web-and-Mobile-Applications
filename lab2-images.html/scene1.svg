@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Dusk Hills">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d2b64"/><stop offset="1" stop-color="#f8cdda"/></linearGradient></defs>
+<rect width="800" height="500" fill="url(#g)"/>
+<circle cx="260" cy="170" r="55" fill="#ffc933"/>
+<path d="M0 360 Q150 260 300 340 T600 330 T800 350 V500 H0Z" fill="#3340ff"/>
+<path d="M0 430 Q200 342 420 420 T800 410 V500 H0Z" fill="#151a33"/>
+</svg>
