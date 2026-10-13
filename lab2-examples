@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery calculation</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var x=10;
+		var y=4.5; //variables are dynamically typed.
+		var result1=x+y;
+
+		//don't forget HTML tags in your output!
+		//will the following line of JS work?
+		//document.getElementById("result").innerHTML="<p>x="+x+", y="+y+"</p>";
+		$("#result").html("<p>x="+x+", y="+y+"</p>");
+		$("#result").append("<p>x + y = "+result1+"</p>");
+		$("#result").append("<p>x - y = "+(x-y)+"</p>");
+		//will the following two work?
+		//document.write("<p>x * y = "+x*y+"</p>"); 
+		//document.write("<p>x / y = "+x/y+"</p>");
+	});
+	</script>
+</head>
+
+<body>
+	<h1>Calculations</h1>
+	<p>This example shows some basic arithmetics.</p>
+	<p id="result"></p>
+</body>
+</html>
