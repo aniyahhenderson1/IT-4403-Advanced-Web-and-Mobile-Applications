@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2 | IT 4403</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab2.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="name">Aniyah Henderson</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab2.html">Lab 2</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Exercise 2</h1>
+            <p>jQuery ready() and Event Handling</p>
+        </section>
+
+        <section class="coursework">
+            <h2>Hide Paragraphs</h2>
+            <div class="stage">
+                <p id="p1">Paragraph one: clicking the first button hides this paragraph.</p>
+                <p id="p2">Paragraph two: clicking the second button hides this paragraph.</p>
+            </div>
+            <div class="controls">
+                <button type="button" class="btn" id="btn1">Hide paragraph 1</button>
+                <button type="button" class="btn" id="btn2">Hide paragraph 2</button>
+            </div>
+            <p class="hint">Reload the page to bring the paragraphs back.</p>
+        </section>
+
+        <section class="coursework">
+            <h2>What I Observed</h2>
+            <h3>Part A: both paragraphs</h3>
+            <p>Both buttons first called <code>$("p").hide()</code>, so either button hid both paragraphs.</p>
+            <h3>Part B: individual paragraphs (the working version on this page)</h3>
+            <pre><code>$(document).ready(function () {
+    $("#btn1").click(function () { $("#p1").hide(); });
+    $("#btn2").click(function () { $("#p2").hide(); });
+});</code></pre>
+            <h3>Part C: removing <code>$(document).ready()</code></h3>
+            <ul class="plain">
+                <li><strong>Does it still work?</strong> It depends on where the script is. In the <code>&lt;head&gt;</code>, the buttons do not exist yet when the code runs, so <code>$("#btn1")</code> finds nothing and the clicks never attach. The buttons do nothing.</li>
+                <li><strong>Does location matter?</strong> Yes. The same code placed at the end of <code>&lt;body&gt;</code>, after the buttons, works without <code>ready()</code>, because the elements already exist.</li>
+                <li><strong>Why is it useful?</strong> <code>ready()</code> waits until the DOM is fully built, so the script works wherever it is placed.</li>
+            </ul>
+        </section>
+
+        <section class="coursework">
+            <a href="lab2.html" class="button">Back to Lab 2</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>Disclaimer</h2>
+        <p>This is a student website created for course projects in IT 4403.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $("#btn1").click(function () { $("#p1").hide(); });
+            $("#btn2").click(function () { $("#p2").hide(); });
+        });
+    </script>
+</body>
+
+</html>
