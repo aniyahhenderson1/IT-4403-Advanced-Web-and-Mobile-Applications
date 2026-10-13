@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture Browser | IT 4403</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab2.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="name">Aniyah Henderson</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab2.html">Lab 2</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Picture Browser Application</h1>
+            <p>JavaScript and jQuery</p>
+        </section>
+
+        <section class="coursework">
+            <h2>Picture Browser</h2>
+            <div class="viewer">
+                <img id="photo" alt="">
+                <p class="caption" id="caption"></p>
+                <p class="counter" id="counter"></p>
+                <div class="controls">
+                    <button type="button" class="btn" id="prev">&larr; Previous</button>
+                    <button type="button" class="btn primary" id="next">Next &rarr;</button>
+                    <button type="button" class="btn" id="auto" aria-pressed="false">Start slideshow</button>
+                </div>
+                <p class="hint">Keyboard: left and right arrow keys also change pictures.</p>
+            </div>
+        </section>
+
+        <section class="coursework">
+            <h2>Image Attribution</h2>
+            <p>All five pictures are original illustrations created for this lab, so no outside permission is needed. To use real photos, replace the <code>src</code> values in the <code>pictures</code> array and fill in the <code>credit</code> text.</p>
+            <p id="credit" class="hint"></p>
+        </section>
+
+        <section class="coursework">
+            <a href="lab2.html" class="button">Back to Lab 2</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>Disclaimer</h2>
+        <p>This is a student website created for course projects in IT 4403.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            var pictures = [
+                { src: "lab2-images/scene1.svg", caption: "Dusk Hills",   credit: "Original illustration" },
+                { src: "lab2-images/scene2.svg", caption: "Rose Valley",  credit: "Original illustration" },
+                { src: "lab2-images/scene3.svg", caption: "Night Peaks",  credit: "Original illustration" },
+                { src: "lab2-images/scene4.svg", caption: "Sky Meadow",   credit: "Original illustration" },
+                { src: "lab2-images/scene5.svg", caption: "Violet Ridge", credit: "Original illustration" }
+            ];
+            var index = 0, timer = null;
+            var $photo = $("#photo");
+
+            function render(i) {
+                var p = pictures[i];
+                $("#caption").text(p.caption);
+                $("#counter").text("Picture " + (i + 1) + " of " + pictures.length);
+                $("#credit").text("Current picture: " + p.credit);
+                $photo.attr("alt", p.caption).attr("src", p.src);
+            }
+
+            // Error handling: show a message if an image fails to load
+            $photo.on("error", function () {
+                $("#caption").text(pictures[index].caption + " (image could not be loaded)");
+            });
+
+            function show(i, instant) {
+                index = (i + pictures.length) % pictures.length;   // wraps to the first/last image
+                if (instant) { render(index); return; }
+                $photo.stop(true, true).fadeOut(250, function () {
+                    render(index);
+                    $photo.fadeIn(250);
+                });
+            }
+
+            $("#next").click(function () { show(index + 1); });
+            $("#prev").click(function () { show(index - 1); });
+
+            $(document).keydown(function (e) {
+                if (e.which === 39) show(index + 1);
+                if (e.which === 37) show(index - 1);
+            });
+
+            $("#auto").click(function () {
+                if (timer) {
+                    clearInterval(timer); timer = null;
+                    $(this).text("Start slideshow").attr("aria-pressed", "false");
+                } else {
+                    timer = setInterval(function () { show(index + 1); }, 2500);
+                    $(this).text("Stop slideshow").attr("aria-pressed", "true");
+                }
+            });
+
+            show(0, true);
+        });
+    </script>
+</body>
+
+</html>
