@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery looping control flow</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+			var level=7;
+			$("#list").append("<ul>");
+			for (i=0;i<level;i++)
+			{
+				$("#list").append("<li>List item "+i+"</li>");
+			}
+			$("#list").append("</ul>");
+	});
+
+	</script>
+</head>
+
+<body>
+<h1>Iteration control flow</h1>
+<h2>for loop</h2>
+<p id="list"></p>
+</body>
+</html>
