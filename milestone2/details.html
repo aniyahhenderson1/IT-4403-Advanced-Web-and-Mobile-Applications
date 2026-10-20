@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details | IT 4403 Milestone 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="milestone2.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <nav aria-label="Main navigation">
+            <a href="index.html" class="brand">Book Finder</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="bookshelf.html">My Bookshelf</a>
+            </div>
+        </nav>
+        <div class="page-title">
+            <h1>Book Details</h1>
+            <p>Everything Open Library has on this book.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="card">
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+            <div id="book" class="details" hidden></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Book data and covers from <a href="https://openlibrary.org" target="_blank" rel="noopener">Open Library</a>.
+        Student project for IT 4403 by Aniyah Henderson. <a href="../index.html">Back to portfolio</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/details.js"></script>
+</body>
+
+</html>
