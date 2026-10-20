@@ -4,7 +4,7 @@ $(document).ready(function () {
         "OL6477875M",     // The Wizard of OZ
         "OL82563W",      // Harry Potter and the Philosopher's Stone
         "OL45804W",      // Fantastic Mr Fox
-        "OL17422847W"    // Example work from the assignment
+        "OL17422847W"    // Example
     ];
 
     var $list = $("#shelf");
