@@ -1,5 +1,3 @@
-/* Milestone 2 additions. Load AFTER ../style.css, which supplies the site-wide look
-   (header, hero, cards, fonts, colors). This file only styles the book-specific parts. */
 :root{--danger:#b00020}
 
 /* Cards overlap the hero, like the rest of the site */
