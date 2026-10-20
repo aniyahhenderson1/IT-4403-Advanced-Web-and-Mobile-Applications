@@ -8,26 +8,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="milestone2.css">
 </head>
 
 <body>
-    <header class="site-header">
+
+    <header>
         <nav aria-label="Main navigation">
-            <a href="index.html" class="brand">Book Finder</a>
+            <a href="../index.html" class="name">Aniyah Henderson</a>
+
             <div class="nav-links">
                 <a href="index.html" aria-current="page">Home</a>
                 <a href="bookshelf.html">My Bookshelf</a>
             </div>
         </nav>
-        <div class="page-title">
-            <h1>Book Search</h1>
-            <p>Search Open Library by keyword, then open a book to see its details.</p>
-        </div>
     </header>
 
+
     <main>
-        <section class="card" aria-labelledby="search-heading">
+
+        <section class="hero">
+            <h1>Book Search</h1>
+            <p>Search Open Library by keyword, then open a book to see its details.</p>
+        </section>
+
+        <section class="coursework" aria-labelledby="search-heading">
             <h2 id="search-heading">Find a Book</h2>
             <form id="search-form" class="search-form" role="search">
                 <div class="field">
@@ -39,7 +45,7 @@
             <p id="status" class="status" role="status" aria-live="polite"></p>
         </section>
 
-        <section class="card" aria-labelledby="results-heading">
+        <section class="coursework" aria-labelledby="results-heading">
             <h2 id="results-heading" tabindex="-1">Results</h2>
             <p id="summary" class="results-summary"></p>
             <ul id="results" class="book-list"></ul>
@@ -49,11 +55,17 @@
                 <span id="page-total"></span>
             </div>
         </section>
+
     </main>
 
-    <footer class="site-footer">
-        <p>Book data and covers from <a href="https://openlibrary.org" target="_blank" rel="noopener">Open Library</a>.
-        Student project for IT 4403 by Aniyah Henderson. <a href="../index.html">Back to portfolio</a></p>
+
+    <footer>
+        <h2>Disclaimer</h2>
+        <p>
+            This is a student website created for course projects in IT 4403.
+            Book data and covers are from <a href="https://openlibrary.org" target="_blank" rel="noopener">Open Library</a>.
+            <a href="../index.html">Back to portfolio</a>
+        </p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
