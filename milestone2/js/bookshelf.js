@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var bookshelfIds = [
         "OL27448W",      // The Lord of the Rings
-        "OL6477875M",     // The Wizard of OZ
+        "OL18417W",     // The Wizard of OZ
         "OL82563W",      // Harry Potter and the Philosopher's Stone
         "OL45804W",      // Fantastic Mr Fox
         "OL17422847W"    // Example
