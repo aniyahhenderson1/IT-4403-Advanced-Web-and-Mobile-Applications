@@ -4,126 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Aniyah Henderson | IT 4403 Project Home</title>
+    <title>Book Finder | IT 4403 Milestone 3</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="milestone3.css">
 </head>
 
 <body>
 
-    <!-- HEADER -->
+    <!-- HEADER: links back to the main course website (full addresses, so they work from any host) -->
     <header>
         <nav aria-label="Main navigation">
-            <a href="index.html" class="name">Aniyah Henderson</a>
+            <a href="https://aniyahhenderson1.github.io/IT-4403-Advanced-Web-and-Mobile-Applications/index.html" class="name">Aniyah Henderson</a>
 
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="#lab-work">Lab Work</a>
-                <a href="#milestones">Individual Project Milestone</a>
+                <a href="https://aniyahhenderson1.github.io/IT-4403-Advanced-Web-and-Mobile-Applications/index.html">Home</a>
+                <a href="https://aniyahhenderson1.github.io/IT-4403-Advanced-Web-and-Mobile-Applications/index.html#lab-work">Lab Work</a>
+                <a href="https://aniyahhenderson1.github.io/IT-4403-Advanced-Web-and-Mobile-Applications/index.html#milestones">Individual Project Milestone</a>
             </div>
         </nav>
-    </header>
 
+        <div class="hero">
+            <h1>Book Finder</h1>
+            <p>Search Open Library, browse a collection, and read book details, all on one page.</p>
+        </div>
+    </header>
 
     <main>
 
-        <!-- HERO: page title, name, description -->
-        <section class="hero">
-            <h1>IT 4403 Project Home</h1>
-            <p><strong>Aniyah Henderson</strong></p>
-
-            <p>
-                This website is my student portfolio. It contains my practice labs
-                and the individual project milestones that builds toward my single-page application project.
-            </p>
-
-            <a href="#milestones" class="button">View Milestone 1</a>
-
-            <div class="spines" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+        <!-- SEARCH INPUT -->
+        <section class="card search-card" aria-labelledby="search-heading">
+            <h2 id="search-heading">Search Books</h2>
+            <form id="search-form" class="search-form" role="search" novalidate>
+                <div class="field">
+                    <label for="search-input">Title or keywords</label>
+                    <input type="text" id="search-input" autocomplete="off" placeholder="e.g. data analysis">
+                </div>
+                <button type="submit" id="search-button" class="btn btn--primary">Search</button>
+            </form>
+            <p id="search-status" class="status" role="status" aria-live="polite"></p>
         </section>
 
+        <div class="app-layout">
 
-        <!-- ABOUT: affiliation and course info -->
-        <section class="about">
+            <!-- SEARCH RESULTS + PAGINATION CONTROLS -->
+            <section class="card area-results" aria-labelledby="results-heading">
+                <h2 id="results-heading">Search Results</h2>
+                <p id="results-status" class="status" role="status" aria-live="polite">Search for a book to see results here.</p>
+                <p id="results-summary" class="summary" aria-live="polite"></p>
+                <ul id="results-list" class="book-list"></ul>
+                <nav id="pagination" class="pagination" aria-label="Search result pages" hidden></nav>
+            </section>
 
-            <h2>About This Site</h2>
+            <!-- SELECTED-BOOK DETAILS -->
+            <section class="card area-details" id="details-section" aria-labelledby="details-heading">
+                <h2 id="details-heading">Book Details</h2>
+                <p id="details-status" class="status" role="status" aria-live="polite">Select a book from the results or the collection to see its details here.</p>
+                <div id="details-panel"></div>
+            </section>
 
-            <p>
-                Course: IT 4403 Advanced Web and Mobile Applications<br>
-                University: Kennesaw State University
-            </p>
+            <!-- PREDEFINED COLLECTION (independent of the search) -->
+            <section class="card area-collection" aria-labelledby="collection-heading">
+                <h2 id="collection-heading">Collection</h2>
+                <p id="collection-status" class="status" role="status" aria-live="polite"></p>
+                <ul id="collection-list" class="book-list"></ul>
+                <button type="button" id="collection-retry" class="btn" hidden>Try again</button>
+            </section>
 
-            <p>
-                <a
-                    href="https://campus.kennesaw.edu/colleges-departments/ccse/academics/information-technology/index.php"
-                    target="_blank" rel="noopener">
-                    CCSE Department of Information Technology
-                </a>
-            </p>
-
-        </section>
-
-
-        <!-- LAB WORK -->
-        <section class="coursework" id="lab-work">
-
-            <h2>Lab Work</h2>
-
-            <div class="course-links">
-                <a href="Lab1.html">Lab 1</a>
-                <a href="lab2.html">Lab 2</a>
-                <a href="lab3.html">Lab 3</a>
-            </div>
-
-        </section>
-
-
-        <!-- INDIVIDUAL PROJECT MILESTONE -->
-        <section class="coursework" id="milestones">
-
-            <h2>Individual Project Milestone</h2>
-
-            <h3>Milestone 1: Working with JSON Data</h3>
-
-            <div class="course-links">
-                <a href="book.html">Milestone 1: Single Book Edition</a>
-                <a href="search.html">Milestone 1: Search Results for &ldquo;modern web&rdquo;</a>
-            </div>
-
-            <h3>Milestone 2: Open Library Book Finder</h3>
-
-            <div class="course-links">
-                <a href="milestone2/index.html">Milestone 2: Book Search</a>
-                <a href="milestone2/bookshelf.html">Milestone 2: My Bookshelf</a>
-            </div>
-
-            <h3>Milestone 3: Single-Page Book Finder</h3>
-
-            <div class="course-links">
-                <a href="https://delightful-hill-023372510.6.azurestaticapps.net" target="_blank" rel="noopener">Milestone 3: Book Finder (SPA, hosted on Azure)</a>
-            </div>
-
-        </section>
+        </div>
 
     </main>
 
-
-    <!-- FOOTER -->
     <footer>
-
         <h2>Disclaimer</h2>
-
         <p>
-            This is a student website created for course projects
-            in IT 4403.
+            This is a student website created for course projects in IT 4403.
+            Book data and covers are from <a href="https://openlibrary.org" target="_blank" rel="noopener">Open Library</a>.
         </p>
-
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
